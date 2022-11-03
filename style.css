@@ -7,15 +7,38 @@
     box-sizing: border-box;
 }
 
+:root{
+    --card-title-border-color:#746615;
+    --card-color-primary:#f7dd43;
+    --card-bg-color:#1d1c19;
+    --bg: url(./assests/bg-yellow.svg);
+
+}
+
+body.blue {
+    --card-title-border-color:#338af3;
+    --card-color-primary:#338af3;
+    --card-bg-color:#202024;
+    --bg: url(./assests/bg-blue.svg);
+}
+
+body.green {
+    --card-title-border-color:#047C3F;
+    --card-color-primary:#047C3F;
+    --card-bg-color:#1a1f1b;
+    --bg: url(./assests/bg-green.svg);
+}
+
 ul{
     list-style:none;
 }
 
 body{
-    background-color:#121214 ;
-    background-image: url(assests/bg-blue.svg);
-    background-position-x: center;
-    background-position-y:-715px;
+    background-color: #121214 ;
+    background-image: var(--bg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 body *{
     font-family: 'Roboto', sans-serif;
@@ -23,7 +46,9 @@ body *{
 
 #app{
     width: fit-content; /* ocupa o tamanho do arquivo dentro */
-    margin: 52px auto;
+    margin: auto;
+    padding-top: 52px;
+    
 }
 
 header{
@@ -40,8 +65,8 @@ header{
 .card{
     padding: 32px 23px;
     text-align: center;
-    background-color: #1d1c19;
-    border-bottom: 2px solid #f7dd43;
+    background-color: var(--card-bg-color);
+    border-bottom: 2px solid var(--card-color-primary);
     border-radius: 6px;
 }
 
@@ -52,7 +77,7 @@ header{
     align-items: center;
 
     padding: 8px 16px;
-    border: 1px solid #746615;
+    border: 1px solid var(--card-title-border-color);
     border-radius: 6px;
     width: fit-center;
     margin-inline: auto;
@@ -89,6 +114,47 @@ text-transform: uppercase;
     font-size: 36px;
     line-height: 125%;
 
-    color: #E1E1E6;
-    
+    color: #E1E1E6;  
+}
+
+.card h2:hover , .card ul li strong:hover , .card ul li img:hover {
+    transform: scale(1.1);
+
+}
+
+.card h2, .card ul li strong, .card ul li img {
+    transition: transform 0.3s;
+}
+
+.card {
+    opacity: 0;
+    animation: appear 1.9s forwards /*forwards mantem as caracteristicas do 100% da keyframes*/;
+}
+/*
+.card:nth-child(1){     seletor que pega o filho "n" do seletor escolhido (no caso .card) para realizar uma ação, ou seja animação em cadeia
+    animation-delay: .1s;
+}
+.card:nth-child(2){
+    animation-delay: .6s;
+}
+.card:nth-child(3){
+    animation-delay: 1.1s;
+}
+*/
+@keyframes appear {  /*criação de regra para animação, aparece e deslocar */
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media ( min-width: 700px ) {
+    #cards{
+        max-width: 670px;
+        flex-direction: row; /* em linha*/
+        flex-wrap: wrap; /*o flex coloca os conteudos em linha, aqui, quando o conteudo passa o tamaho maximo ele joga o teudo pra baixo*/
+    }
 }
